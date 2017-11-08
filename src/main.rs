@@ -22,6 +22,20 @@ struct GameObject {
     pub y: Pos,
     pub size: f64,
     pub colour: [f32; 4],
+    pub solid: bool,
+}
+
+impl GameObject {
+    pub fn hedge(x: Pos, y: Pos) -> GameObject {
+        let dark_green = [0.0, 150.0/255.0, 0.0, 1.0];
+        GameObject {
+            x,
+            y,
+            size: 40.0,
+            colour: dark_green,
+            solid: true,
+        }
+    }
 }
 
 fn main() {
@@ -40,16 +54,19 @@ fn main() {
     let white = [1.0, 1.0, 1.0, 1.0];
     let grey = [0.8, 0.8, 0.8, 1.0];
     let red = [1.0, 0.0, 0.0, 1.0];
-    let green = [0.0, 1.0, 0.0, 1.0];
-
-    let square_size = 40.0;
 
     let mut player = GameObject {
         x: 50.0,
         y: 50.0,
         size: 40.0,
         colour: red,
+        solid: true,
     };
+
+    let environment = [
+        GameObject::hedge(227.0, 265.0),
+        GameObject::hedge(290.0, 265.0),
+    ];
 
 
     window.set_lazy(true);
@@ -65,9 +82,19 @@ fn main() {
                     y,
                     size,
                     colour,
-                }= player;
+                    ..
+                } = player;
                 Rectangle::new(colour).draw([x, y, size, size], &c.draw_state, c.transform, g);
-                // Do all other rendering
+                for obj in environment.iter() {
+                    let &GameObject {
+                        x,
+                        y,
+                        size,
+                        colour,
+                        ..
+                    } = obj;
+                    Rectangle::new(colour).draw([x, y, size, size], &c.draw_state, c.transform, g);
+                }
             });
             target.finish().unwrap();
         }
