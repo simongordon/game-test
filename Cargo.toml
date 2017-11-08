@@ -1,0 +1,27 @@
+[package]
+name = "game_test"
+version = "0.1.0"
+authors = ["Simon Gordon <gordonsimon@hotmail.com>"]
+
+#[dependencies.glium]
+#default_features = false
+
+[dependencies]
+#glium_graphics = "*"
+#glium = "0.18.0"
+#piston2d-graphics = "0.23.0"
+
+piston = "0.35.0"
+piston2d-graphics = "0.23.0"
+piston2d-glium_graphics = { git = "https://github.com/pistondevelopers/glium_graphics" }
+#glium = "*"
+#image = "0.17.0"
+#piston-shaders_graphics2d = "0.3.1"
+#piston-texture = "0.6.0"
+#piston = "0.35.0"
+#shader_version = "0.3.0"
+#pistoncore-glutin_window = "0.42.0"
+
+#[dependencies.piston2d-graphics]
+#version = "0.23.0"
+#features = ["glyph_cache_rusttype"]
